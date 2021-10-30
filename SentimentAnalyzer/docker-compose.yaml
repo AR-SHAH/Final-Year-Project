@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+
+  db:
+    image: postgres:13
+    restart: unless-stopped
+    container_name: sentiment.db
+    command: ["postgres", "-c", "log_min_error_statement=PANIC"]
+    ports:
+      # Mapping to 5433 to avoid conflict to an already running postgres service on host machine.
+      - "5434:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpass
+      POSTGRES_DB: postgres

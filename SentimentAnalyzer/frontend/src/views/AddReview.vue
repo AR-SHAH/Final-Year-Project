@@ -9,8 +9,8 @@
         </select>
         <label for="review">Enter your Review: </label>
         <input type="Text" name="review" requried placeholder='Enter your review' v-model="rev"/>
-        <button v-on:click="post">Save to DB</button>
     </form>
+       <button v-on:click="post">Save to DB</button>
        <h1>{{id}}</h1>
 
     </div>
@@ -38,7 +38,13 @@ methods: {
                 bodyFormData.append('product', mydata[0]);
                 bodyFormData.append('review', mydata[1]);
                 axios.post("http://127.0.0.1:8000/",bodyFormData )
-                .then(alert('Data Submitted Successfully'));
+                .then(response=>{
+                 console.log(response.data)
+                 })
+                .catch(err=>{
+                  console.log(err)
+                  this.id = err
+                 });
             },
         },  
 created() {

@@ -40,7 +40,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'mainApp',
     'corsheaders',
-    'django_extensions'
+    'django_extensions',
+    'rest_framework_simplejwt',
+
+    
 ]
 
 MIDDLEWARE = [
@@ -80,18 +83,16 @@ WSGI_APPLICATION = 'SentimentAnalyzer.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'reviews_db',
-        'USER': 'admin',
-        'PASSWORD': 'password',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'mysecretpass',
         'HOST': 'localhost',
-        'PORT': '',
+        'PORT': '5434',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -140,3 +141,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 GRAPH_MODELS = {
   'app_labels': ["mainApp"],
 }
+
+REST_FRAMEWORK ={
+    'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework_simplejwt.authentication.JWTAuthentication',),
+    # 'DEFAULT_PERMISSION_CLASSES':[
+    #     'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    # ]
+}
+SIMPLE_JWT={"AUTH_HEADER_TYPES":('Bearer',),}
+
